@@ -90,3 +90,20 @@ updateDepartment() {
   });
 };
 
+deleteDepartment() {
+  inquirer.prompt([
+      {
+          name: "id",
+          type: "input",
+          message: "What's the ID of the department you would like to delete?" 
+      }
+  ]).then(data => {
+      const query = "DELETE FROM WHICH department?";
+      const values = { id: data.id };
+
+      connection.query(query, values, (err, res) => {
+          if (err) throw err;
+          console.log("Your department has been deleted from the database.");
+        });
+    });
+};
