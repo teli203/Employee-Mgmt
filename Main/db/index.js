@@ -106,4 +106,13 @@ deleteDepartment() {
           console.log("Your department has been deleted from the database.");
         });
     });
-};
+
+
+class Role {
+  constructor(title, salary, department_id) { 
+      this.title = title;
+      this.salary = salary;
+      this.department_id = department_id;
+  }
+
+  
