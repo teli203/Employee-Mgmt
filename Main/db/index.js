@@ -133,5 +133,11 @@ class Role {
           message: "What's the Department ID of new role?"
       
         }
-        
-    ])
+
+    ]).then((data) => {
+            const query = "INSERT INTO role SET ?"; 
+            const values = {
+                title: data.title,
+                salary: data.salary,
+                department_id: data.department_id
+            };        
