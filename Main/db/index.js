@@ -43,3 +43,14 @@ class Department {
           });
       });
   };
+
+  viewDepartments() {
+    const query = "SELECT * FROM department";
+
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+
+        const table = cTable.getTable(res);
+        console.log(table);
+    });
+};
