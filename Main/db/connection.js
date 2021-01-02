@@ -1,19 +1,13 @@
-const util = require("util");
+// Dependencies //
 const mysql = require("mysql");
 
+// MySQL connection //
 const connection = mysql.createConnection({
   host: "localhost",
-  // Your username
+  port: 3306,
   user: "root",
-  // Your password
-  password: "",
-  database: "employees"
+  password: "hardworkeR/1",
+  database: "employee_mgmt_db" 
 });
-
-connection.connect();
-
-// Setting up connection.query to use promises instead of callbacks
-// This allows us to use the async/await syntax
-connection.query = util.promisify(connection.query);
 
 module.exports = connection;
