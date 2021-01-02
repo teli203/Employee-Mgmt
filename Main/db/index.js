@@ -62,10 +62,10 @@ updateDepartment() {
       {
           name: "id",
           type: "input",
-          message: "What is the id of the department you would like to update?"
+          message: "What's the id of the department you would like to update?"
       },
       {
           name: "name",
           type: "input",
-          message: "Update department name to: "
+          message: "What are you updating the department name to? "
       }
