@@ -44,6 +44,7 @@ class Department {
       });
   };
 
+  // dept view & error //
   viewDepartments() {
     const query = "SELECT * FROM department";
 
@@ -54,3 +55,17 @@ class Department {
         console.log(table);
     });
 };
+
+// Questions //
+updateDepartment() { 
+  inquirer.prompt([
+      {
+          name: "id",
+          type: "input",
+          message: "What is the id of the department you would like to update?"
+      },
+      {
+          name: "name",
+          type: "input",
+          message: "Update department name to: "
+      }
