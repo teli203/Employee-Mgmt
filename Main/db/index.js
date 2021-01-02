@@ -69,3 +69,24 @@ updateDepartment() {
           type: "input",
           message: "What are you updating the department name to? "
       }
+      // data .. //
+    ]).then((data) => {
+      const query = "UPDATE department SET ? WHERE ?"; 
+      const values = [
+          {
+              name: data.name
+          },
+          {
+              id: data.id
+          }
+      ];
+
+      connection.query(query, values, (err, res) => { // copied same err throw from 51-55 //
+          if (err) throw err;
+
+          // this may not work //
+          console.log("Department Updated");
+      });
+  });
+};
+
