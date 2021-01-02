@@ -115,4 +115,16 @@ class Role {
       this.department_id = department_id;
   }
 
-  
+  addRole() { 
+    inquirer.prompt([
+        {
+            name: "title",
+            type: "input",
+            message: "What's the title of the new role you're adding?"
+        },
+        {
+          name: "",
+          type: "",
+          message:""
+        },
+        
