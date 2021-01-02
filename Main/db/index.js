@@ -123,8 +123,15 @@ class Role {
             message: "What's the title of the new role you're adding?"
         },
         {
-          name: "",
-          type: "",
-          message:""
+          name: "salary",
+          type: "input",
+          message:"What's the salary of the new role created?"
         },
+        { 
+          name: "department_id",
+          type: "input",
+          message: "What's the Department ID of new role?"
+      
+        }
         
+    ])
