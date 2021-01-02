@@ -141,3 +141,13 @@ class Role {
                 salary: data.salary,
                 department_id: data.department_id
             };        
+
+            connection.query(query, values, (err, res) => {
+              if (err) throw err;
+
+           console.log("Your new table has been added to the database!");
+            });
+        });
+    };
+
+    
