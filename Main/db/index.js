@@ -150,4 +150,61 @@ class Role {
         });
     };
 
-    
+    viewRoles() {
+      const query = "SELECT * FROM role";
+      connection.query(query, (err, res) => {
+          if (err) throw err;
+
+          const table = cTable.getTable(res);
+          console.log(table);
+      })
+  };
+
+  // Update
+  updateRole() {
+      inquirer.prompt({
+              name: "roleOptions",
+              type: "rawlist",
+              message: "What would you like to do?",
+              choices: [
+                  "Update role title",
+                  "Update role salary",
+                  "Update role department designation",
+                  "back"
+              ]
+          }).then(onUpdateRole);
+  }; 
+
+  onUpdateRole({ roleOptions }) { 
+      switch (roleOptions) {
+          case "Update role title":
+              this.updateRoleTitle();
+              break;
+          case "Update role salary":
+              this.updateRoleSalary();
+              break;
+          case "Update role department designation":
+            this.updateRoleDepartment();
+            break;
+        case "back":
+        default: 
+            mainPrompt();
+            console.log("Trying to return to the main page!");
+    }
+}
+
+updateRoleTitle() {
+  inquirer.prompt([
+    {
+      name: "id",
+      type: "input",
+      message: "What's the ID of the role you would like to update?"
+    },
+    {
+      name:"",
+      type:"",
+      message:""
+    },
+  ])
+}
+
