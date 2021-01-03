@@ -215,9 +215,34 @@ updateRoleTitle() {
     connection.query(query, values, (err, res) => {
       if (err) throw err;
 
-      
       console.log("You updated a role title.");
     });
   });
 };
 
+updateRoleSalary() {
+  inquirer.prompt([
+      {
+          name: "id",
+          input: "input",
+          message: "What is the ID of the role you would like to update?"
+      },
+      {
+          name: "salary",
+          type: "input",
+          message: "What would you like to update role salary to? "
+      }
+  ]).then(data => {
+      const query = "UPDATE role SET ? WHERE ?";
+      const values = [
+          { salary: data.salary },
+          { id: data.id }
+      ];
+
+      connection.query(query, values, (err, res) => {
+          if (err) throw err;
+
+          console.log("You updated a role salary.");
+      });
+  });
+};
