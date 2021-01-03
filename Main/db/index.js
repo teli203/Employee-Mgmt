@@ -211,6 +211,13 @@ updateRoleTitle() {
       { title: data.title },
       { id: data.id }
     ];
-  })
-}
+
+    connection.query(query, values, (err, res) => {
+      if (err) throw err;
+
+      
+      console.log("You updated a role title.");
+    });
+  });
+};
 
