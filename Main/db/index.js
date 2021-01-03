@@ -444,7 +444,7 @@ viewbyDept() {
               type: "rawlist",
               message: "What would you like to do?",
               choices: [
-                  "Update employee name",
+                  "Update employee's name",
                   "Update employee's role",
                   "Update employee's manager",
                   "back"
@@ -534,3 +534,29 @@ updateRole() {
   });
 };
 // Update by Manager //
+updateManager() {
+  inquirer.prompt([
+      {
+          name: "id",
+          type: "input",
+          message: "What is the ID of the employee you would like to update?"
+      },
+      {
+          name: "manager_id",
+          type: "input",
+          message: "What would you like to update the manager with ID to?"
+      }
+  ]).then(data => {
+      const query = "UPDATE employee SET ? WHERE ?";
+      const values = [
+          { manager_id: data.manager_id },
+          { id: data.id }
+      ];
+
+      connection.query(query, values, (err, res) => {
+          if (err) throw err;
+
+          console.log("You updated the employee's manager.");
+      });
+  });
+};
