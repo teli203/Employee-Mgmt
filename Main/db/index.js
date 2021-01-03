@@ -276,4 +276,23 @@ updateRoleDepartment() {
   });
 };
 
+// Deleting a Role //
+deleteRole() {
+  inquirer.prompt([
+      {
+          name: "id",
+          type: "input",
+          message: "What's the ID of the role you would like to delete?"
+      }
+  ]).then(data => {
+      const query = "DELETE FROM role WHERE ?";
+      const values = { id: data.id }; 
+
+      connection.query(query, values, (err, res) => {
+          if (err) throw err;
+
+          console.log("You deleted a role from the database.");
+      });
+  });
+};
 
