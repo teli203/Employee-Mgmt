@@ -436,4 +436,36 @@ viewbyDept() {
     viewByRole() { 
       const query = "trying to view employees by role";
       console.log(query);
+    }
+// Update Employee by Options //
+    updateEmployee() {
+      inquirer.prompt({
+              name: "employeeOptions",
+              type: "rawlist",
+              message: "What would you like to do?",
+              choices: [
+                  "Update employee name",
+                  "Update employee's role",
+                  "Update employee's manager",
+                  "back"
+              ]
+      }).then(onUpdateEmployee);
+  };
 
+  onUpdateEmployee({ employeeOptions }) { 
+    switch (employeeOptions) {
+        case "Update employee name":
+            this.updateName();
+            break;
+        case "Update employee's role":
+            this.updateRole();
+            break;
+        case "Update employee's manager":
+            this.updateManager();
+            break;
+        case "back":
+        default:
+            mainPrompt();
+            console.log("Trying to return to the main page!");
+    }
+}
