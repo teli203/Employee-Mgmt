@@ -346,6 +346,94 @@ class Employee {
       });
   };
 
+  // View Employees //
+  viewEmployees() {
+    inquirer.prompt({
+        name: "byType",
+        type: "rawlist",
+        message: "What would you like to do?",
+        choices: [
+            "View all employees",
+            "View employees by department",
+            "View employees by role",
+            "View employees by manager",
+            "back"
+        ]
+    }).then(onViewEmployees);
+};
 
+// On View of Employees "switch" //
+onViewEmployees({ byType }) {
+  switch (byType) {
+      case "View all employees":
+          this.viewAllEmployees;
+          break;
+      case "View employees by department":
+          this.viewbyDept;
+          break;
+      case "View employees by role":
+          this.viewByRole;
+          break;
+      case "View employees by manager":
+          this.viewByManager;
+          break;
+      case "back":
+      default:
+          mainPrompt()
+          console.log("Trying to return to the main page?");
+  }
+};
+// View All //
+viewAllEmployees() {
+  const query = "SELECT * FROM employee";
+  connection.query(query, (err, res) => {
+      if (err) throw err;
 
-  
+      const table = cTable.getTable(res);
+      console.log(table);
+  });
+};
+
+// View by Dept //
+viewbyDept() { 
+  const query = "trying to view employees by department";
+  const baseQuery = `SELECT e1.id AS EMPID, e1.first_name AS FName, e1.last_name AS LName, role.title AS Title, department.name AS Department, role.salary AS Salary, 
+  CONCAT(e2.first_name, " ", e2.last_name) AS Manager 
+  FROM employee AS e1
+  LEFT JOIN role on e1.role_id = role.id
+  LEFT JOIN department ON role.department_id = department.id
+  LEFT JOIN employee AS e2 ON e2.id=e1.manager_id
+  ORDER BY department ASC;`;
+  const queryOpt2 = `SELECT e.first_name, e.last_name, r.title, r.salary, 
+  CONCAT(e1.first_name, " ", e1.last_name) as manager 
+  FROM employee e
+  INNER JOIN role r ON e.role_id = r.id 
+  LEFT JOIN employee e1 ON e.manager_id = e1.id
+  WHERE r.department_id = ?`;
+
+  console.log(query);
+}
+
+// View by Mgr //
+  viewByManager() {
+    const query = "trying to view employees by manager";
+    const queryOpt1 = `SELECT CONCAT(e2.first_name, " ", e2.last_name) AS Manager, e1.id AS EMPID, e1.first_name AS FName, e1.last_name AS LName, role.title AS Title, department.name AS Department, role.salary AS Salary 
+    FROM employee AS e1
+    LEFT JOIN role on e1.role_id = role.id
+    LEFT JOIN department ON role.department_id = department.id
+    INNER JOIN employee AS e2 on e2.id=e1.manager_id
+    ORDER BY manager ASC;`;
+    const queryOpt2 = `SELECT e.first_name, e.last_name, r.title, r.salary, 
+    CONCAT(e1.first_name, " ", e1.last_name) as manager 
+    FROM employee e
+    INNER JOIN role r ON e.role_id = r.id 
+    LEFT JOIN employee e1 ON e.manager_id = e1.id
+    WHERE r.department_id = ?`;
+   
+    console.log(query);
+  }
+// View by Role //
+    viewByRole() { 
+      const query = "trying to view employees by role";
+      console.log(query);
+
