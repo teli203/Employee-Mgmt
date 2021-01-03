@@ -560,3 +560,24 @@ updateManager() {
       });
   });
 };
+
+// Deleting an Employee //
+deleteEmployee() {
+  inquirer.prompt([
+      {
+          name: "id",
+          type: "input",
+          message: "What's the ID of the employee you want to delete?"
+      }
+  ]).then(data => {
+      const query = "DELETE FROM employee WHERE ?";
+      const values = { id: data.id };
+
+      connection.query(query, values, (err, res) => {
+          if (err) throw err;
+
+          console.log("You deleted an employee form the database.");
+      })
+  })
+}
+
