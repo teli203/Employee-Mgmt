@@ -38,7 +38,6 @@ class Department {
             connection.query(query, values, (err, res) => {
               if (err) throw err;
 
-              
               console.log("New department added to database!"); 
           });
       });
@@ -191,7 +190,7 @@ class Role {
             mainPrompt();
             console.log("Trying to return to the main page!");
     }
-}
+};
 // Title //
 updateRoleTitle() {
   inquirer.prompt([
@@ -412,7 +411,7 @@ viewbyDept() {
   WHERE r.department_id = ?`;
 
   console.log(query);
-}
+};
 
 // View by Mgr //
   viewByManager() {
@@ -468,7 +467,7 @@ viewbyDept() {
             mainPrompt();
             console.log("Trying to return to the main page!");
     }
-}
+};
 
 // Update by Name //
 updateName() { 
@@ -533,6 +532,7 @@ updateRole() {
       });
   });
 };
+
 // Update by Manager //
 updateManager() {
   inquirer.prompt([
@@ -580,4 +580,93 @@ deleteEmployee() {
       })
   })
 }
+};
 
+// Start CLI //
+function start() {
+    mainPrompt();
+};
+
+function mainPrompt() {
+    inquirer.prompt({
+        name: "action",
+        type: "rawlist",
+        message: "What would you like to do?",
+        choices: [
+            "View all departments",
+            "View all roles",
+            "View employee details",
+            "Update existing departments",
+            "Update existing roles",
+            "Update existing employees",
+            "Add department",
+            "Add role",
+            "Add employee",
+            "Delete department",
+            "Delete role",
+            "Delete employee",
+            "exit"
+        ]
+    }).then(onMainPromptAnswer);
+};
+
+function onMainPromptAnswer({ action }) { 
+  switch (action) {
+      case "View all departments":
+          department.viewDepartments();
+          mainPrompt();
+          break;
+      case "View all roles":
+          role.viewRoles();
+          mainPrompt();
+          break;
+      case "View employee details":
+          employee.viewEmployees();
+          mainPrompt();
+          break;
+      case "Update existing departments":
+          department.updateDepartment();
+          mainPrompt();
+          break;
+      case "Update existing roles":
+          role.updateRole();
+          mainPrompt();
+          break;
+      case "Update existing employees":
+          employee.updateEmployee();
+          mainPrompt();
+          break;
+      case "Add department":
+          department.addDepartment();
+          mainPrompt();
+          break;
+      case "Add role":
+          role.addRole();
+          mainPrompt();
+          break;
+      case "Add employee":
+          employee.addEmployee();
+          mainPrompt();
+          break;
+      case "Delete department":
+          department.deleteDepartment();
+          mainPrompt();
+          break;
+      case "Delete role":
+          role.deleteRole();
+          mainPrompt();
+          break;
+      case "Delete employee":
+          employee.deleteEmployee();
+          mainPrompt();
+          break;
+      case "exit":
+      default: 
+          console.log("Thanks have a nice day")
+          connection.end();
+  };
+};
+
+module.exports = {
+  start: start,
+}
