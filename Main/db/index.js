@@ -201,10 +201,16 @@ updateRoleTitle() {
       message: "What's the ID of the role you would like to update?"
     },
     {
-      name:"",
-      type:"",
-      message:""
-    },
-  ])
+      name:"title",
+      type:"input",
+      message:"What are you updating the title to?"
+    }
+  ]).then(data => {
+    const query = "UPDATE role SET ? WHERE ?";
+    const values = [
+      { title: data.title },
+      { id: data.id }
+    ];
+  })
 }
 
