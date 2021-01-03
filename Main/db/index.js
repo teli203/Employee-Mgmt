@@ -56,7 +56,7 @@ class Department {
     });
 };
 
-// Questions //
+// Questions about dept type //
 updateDepartment() { 
   inquirer.prompt([
       {
@@ -89,7 +89,7 @@ updateDepartment() {
       });
   });
 };
-
+// Deleted dept //
 deleteDepartment() {
   inquirer.prompt([
       {
@@ -114,7 +114,7 @@ class Role {
       this.salary = salary;
       this.department_id = department_id;
   }
-
+// Add Role //
   addRole() { 
     inquirer.prompt([
         {
@@ -160,7 +160,7 @@ class Role {
       })
   };
 
-  // Update
+  // Update //
   updateRole() {
       inquirer.prompt({
               name: "roleOptions",
@@ -174,7 +174,7 @@ class Role {
               ]
           }).then(onUpdateRole);
   }; 
-
+// Switch //
   onUpdateRole({ roleOptions }) { 
       switch (roleOptions) {
           case "Update role title":
@@ -192,7 +192,7 @@ class Role {
             console.log("Trying to return to the main page!");
     }
 }
-
+// Title //
 updateRoleTitle() {
   inquirer.prompt([
     {
@@ -219,7 +219,7 @@ updateRoleTitle() {
     });
   });
 };
-
+// Salary //
 updateRoleSalary() {
   inquirer.prompt([
       {
@@ -246,3 +246,34 @@ updateRoleSalary() {
       });
   });
 };
+
+// Update Role //
+updateRoleDepartment() {
+  inquirer.prompt([
+      {
+          name: "id",
+          type: "input",
+          message: "What's the ID of the role you would like to update?"
+      },
+      {
+          name: "department_id",
+          type: "input",
+          message: "What's the ID of the department you would like to designate the role to?" 
+      }
+  ]).then(data => {
+      const query = "UPDATE role SET ? WHERE ?";
+      const values = [
+          { department_id: data.department_id },
+          { id: data.id }
+      ];
+
+      connection.query(query, values, (err, res) => {
+          if (err) throw err;
+
+          
+          console.log("You've updated a role's department!");
+      });
+  });
+};
+
+
