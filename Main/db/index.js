@@ -505,3 +505,32 @@ updateName() {
         });
     });
 };
+
+// Update by Role //
+updateRole() {
+  inquirer.prompt([
+      {
+          name: "id",
+          type: "input",
+          message: "What is the ID of the employee you would like to update?"
+      },
+      {
+          name: "role_id",
+          type: "input",
+          message: "What is the ID of the role you would like to update to?"
+      }
+  ]).then(data => {
+      const query = "UPDATE employee SET ? WHERE ?";
+      const values = [
+          { role_id: data.role_id },
+          { id: data.id }
+      ];
+
+      connection.query(query, values, (err, res) => {
+          if (err) throw err;
+
+          console.log("You've update the employee's role!");
+      });
+  });
+};
+// Update by Manager //
