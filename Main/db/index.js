@@ -469,3 +469,39 @@ viewbyDept() {
             console.log("Trying to return to the main page!");
     }
 }
+
+// Update by Name //
+updateName() { 
+  inquirer.prompt([
+      {
+          name: "id",
+          type: "input",
+          message: "What is the ID of the employee you would like to update?"
+      },
+      {
+          name: "first_name",
+          type: "input",
+          message: "Update first name: "
+      },
+      {
+          name: "last_name",
+          type: "input",
+          message: "Update last name: "
+      }
+  ]).then(data => {
+      const query = "UPDATE employee SET ? WHERE ?"; 
+      const values = [
+          { 
+              first_name: data.first_name,
+              last_name: data.last_name 
+          },
+          { id: data.id }
+      ];
+
+      connection.query(query, values, (err, res) => {
+          if (err) throw err;
+
+          console.log("You updated an employee's name.");
+        });
+    });
+};
