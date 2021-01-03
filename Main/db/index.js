@@ -271,7 +271,7 @@ updateRoleDepartment() {
           if (err) throw err;
 
           
-          console.log("You've updated a role's department!");
+          console.log("You updated a role's department");
       });
   });
 };
