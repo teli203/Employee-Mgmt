@@ -329,4 +329,23 @@ class Employee {
               message: "Who is the employee's manager?" 
           }
 
-          
+        ]).then((data) => {
+          const query = "INSERT INTO employee SET ?";
+          const values = {
+              first_name: data.first_name,
+              last_name: data.last_name,
+              role_id: data.role_id,
+              manager_id: data.manager_id
+          };
+
+          connection.query(query, values, (err, res) => {
+              if (err) throw err;
+
+              console.log("You added a new employee to the database!");
+          });
+      });
+  };
+
+
+
+  
