@@ -1,0 +1,26 @@
+{
+  "name": "employee-mgmt",
+  "version": "1.0.0",
+  "description": "employee-tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teli203/Employee-Mgmt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teli203/Employee-Mgmt.git"
+  },
+  "homepage": "https://github.com/teli203/Employee-Mgmt.git",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1",
+    "util": "^0.12.3"
+  }
+}
